@@ -1,0 +1,25 @@
+targets = msvc_dynamic_returnzero msvc_static_returnzero
+
+srcfile = src\c\returnzero.c
+
+exefold = bin\windows\exe
+objfold = bin\windows\obj
+
+all : binfolders $(targets)
+
+binfolders :
+	if not exist $(exefold) mkdir $(exefold)
+	if not exist $(objfold) mkdir $(objfold)
+
+msvc_static_returnzero : $(srcfile)
+	cl /MT /MTd /Fe:$(exefold)\$@.exe /Fo:$(objfold)\$@.obj $?
+
+msvc_dynamic_returnzero : $(srcfile)
+	cl /Fe:$(exefold)\$@.exe /Fo:$(objfold)\$@.obj $?
+
+
+# nmake /f .\NMakefile clean
+clean :
+	del /q $(objfold)\*
+	del /q $(exefold)\*
+
