@@ -2,8 +2,8 @@ targets = msvc_dynamic_returnzero msvc_static_returnzero
 
 srcfile = src\c\returnzero.c
 
-exefold = bin\windows\exe
-objfold = bin\windows\obj
+exefold = bin\x86\windows\exe
+objfold = bin\x86\windows\obj
 
 all : binfolders $(targets)
 
@@ -17,9 +17,7 @@ msvc_static_returnzero : $(srcfile)
 msvc_dynamic_returnzero : $(srcfile)
 	cl /Fe:$(exefold)\$@.exe /Fo:$(objfold)\$@.obj $?
 
-
 # nmake /f .\NMakefile clean
 clean :
 	del /q $(objfold)\*
 	del /q $(exefold)\*
-
